@@ -1,0 +1,21 @@
+/* 출처 : https://codepen.io/hyukson/pen/yLKLNGM */
+
+#screen_welcome {
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 1.8rem;
+}
+/* .welcome_text::after {
+    content: '';
+    margin-left: .4rem;
+    border-right: 2px solid #ffffff;
+    animation: cursor .9s infinite steps(2);
+} */
+  
+  /* @keyframes cursor {
+    from { border-right: 2px solid #ffffff; }
+    to { border-right: 2px solid #777; }
+} */
+  

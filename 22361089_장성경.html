@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장성경의 컴퓨터</title>
+    <link rel="stylesheet" href="./main_contents.css" />
+    <link rel="stylesheet" href="./main_contents_inside.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'pretendard';
+        }
+        .clear {
+            clear: both;
+        }
+        /* 출처 https://codepen.io/TytanLee/pen/zYywpmp */
+        .noise {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1001;
+            background-image: url('https://i.ibb.co/x3TCktM/645cbb8ec449398255b76326-noise.gif');
+            background-position: 0 0;
+            background-size: auto;
+            pointer-events: none;
+            opacity: 0.05;
+            transition: opacity .2s cubic-bezier(.445, .05, .55, .95); 
+            visibility: visible;
+            /*   원본 페이지 : https://www.rawlab.co */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <div id="wrap">
+        <div id="background">
+            <div class="window"></div>
+            <div class="window_frame"></div>
+        </div>
+        <div id="main_contents">
+            <div id="monitor">
+                <div class="monitor_screen">
+                    <div id="screen_password"> <!-- password 입력 -->
+                        <div id="screen_welcome">
+                            <p class="welcome_text"></p>
+                            <div id="welcome_password" class="block"> <!-- block 상태 -->
+                                <p id="welcome_password_num"></p>
+                                <label id="welcome_password_input">
+                                    <input type="text" name="password" maxlength='4' id="welcome_password_enter">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+<!------------------------------------------------ icon ------------------------------------------------>
+
+                    <!--바탕화면 block 상태 class="block"-->
+                    <div id="screen_main" class="block" >
+                        <div id="screen_contents">
+                            <div class="contents_icon one">
+                                <div class="contents_img">
+                                    <img src="./img/icon/computer.png" width="75px">
+                                </div>
+                                <p>computer</p>
+                            </div>
+                            <div class="contents_icon two">
+                                <div class="contents_img">
+                                    <img src="./img/icon/gamepad.png" width="75px">
+                                </div>
+                                <p>nintendo</p>
+                            </div>
+                            <div class="contents_icon three">
+                                <div class="contents_img">
+                                    <img src="./img/icon/bluemarble.png" width="75px">
+                                </div>
+                                <p>blue marble</p>
+                            </div>
+                            <div class="contents_icon four">
+                                <div class="contents_img">
+                                    <img src="./img/icon/passport.png" width="75px">
+                                </div>
+                                <p>passport</p>
+                            </div>
+                            <div class="contents_icon five">
+                                <div class="contents_img">
+                                    <img src="./img/icon/camera.png" width="75px">
+                                </div>
+                                <p>camera</p>
+                            </div>
+                            <div class="contents_icon six">
+                                <div class="contents_img">
+                                    <img src="./img/icon/coffee.png" width="75px">
+                                </div>
+                                <p>coffee</p>
+                            </div>
+                            <div class="contents_icon seven">
+                                <div class="contents_img">
+                                    <img src="./img/icon/music.png" width="75px">
+                                </div>
+                                <p>music</p>
+                            </div>
+                            <div class="contents_icon eight">
+                                <div class="contents_img">
+                                    <img src="./img/icon/art.png" width="75px">
+                                </div>
+                                <p>colorpicker</p>
+                            </div>
+                            <div class="contents_icon nine">
+                                <div class="contents_img">
+                                    <img src="./img/icon/lang.png" width="75px">
+                                </div>
+                                <p>language</p>
+                            </div>
+<!------------------------------------------------ modal창 ------------------------------------------------>
+                            <div id="contents_modal">
+                                <div class="modal_content one block">
+                                    <div class="modal_topbar">
+                                        <p>computer</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_computer">
+                                                <div id="computer">
+                                                    <div id="computer_screen">
+                                                        <div class="computer_screen_screen block">
+                                                            <div class="computer_screen_title">
+                                                                <img src="./img/computer_title.png" alt="">
+                                                            </div>
+                                                            <div class="computer_screen_start">
+                                                                <div id="computer_game_start">GAME START</div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="computer_game" class="block">
+                                                            <canvas id="computer_screen_game" width="380" height="320"></canvas>
+                                                        </div>
+                                                    </div>
+                                                    <div class="computer_on_button monitor"></div>
+                                                    <div class="computer_on_button computer"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_content two block">
+                                    <div class="modal_topbar">
+                                        <p>nintendo</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_nintendo_close" class="block">
+                                                <div class="nintendo_bar">
+                                                    <div class="nintendo_bar_left"></div>
+                                                    <div class="nintendo_bar_center"></div>
+                                                    <div class="nintendo_bar_right"></div>
+                                                </div>
+                                            </div>
+                                            <div id="modal_nintendo_open" class="bl ock">
+                                                <div class="nintendo_monitor">
+                                                    <div class="nintendo_audio">
+                                                        <div class="nintendo_audio_first">
+                                                            <div class="nintendo_audio_circle_first"></div>
+                                                            <div class="nintendo_audio_circle_first"></div>
+                                                            <div class="nintendo_audio_circle_first"></div>
+                                                        </div>
+                                                        <div class="nintendo_audio_second">
+                                                            <div class="nintendo_audio_circle_second"></div>
+                                                            <div class="nintendo_audio_circle_second"></div>
+                                                            <div class="nintendo_audio_circle_second"></div>    
+                                                        </div>
+                                                    </div>
+                                                    <div class="nintendo_screen_glass">
+                                                        <div class="nintendo_screen up">
+                                                            <div class="nintendo_screen_intro">
+                                                                <video width="280px" height="220px">
+                                                                    <source src="./video/Nintendo DS startup intro2.mp4" type="video/mp4">
+                                                                </video>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="nintendo_audio">
+                                                        <div class="nintendo_audio_first">
+                                                            <div class="nintendo_audio_circle_first"></div>
+                                                            <div class="nintendo_audio_circle_first"></div>
+                                                            <div class="nintendo_audio_circle_first"></div>
+                                                        </div>
+                                                        <div class="nintendo_audio_second">
+                                                            <div class="nintendo_audio_circle_second"></div>
+                                                            <div class="nintendo_audio_circle_second"></div>
+                                                            <div class="nintendo_audio_circle_second"></div>    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="nintendo_bar">
+                                                    <div class="nintendo_bar_left"></div>
+                                                    <div class="nintendo_bar_center"></div>
+                                                    <div class="nintendo_bar_right"></div>
+                                                </div>
+                                                <div class="nintendo_monitor">
+                                                    <div class="nintendo_move_key"></div>
+                                                    <div class="nintendo_screen_glass">
+                                                        <div class="nintendo_screen down">
+                                                            <div id="nintendo_screen_main" class="block">
+                                                                <div id="nintendo_screen_abtn">
+                                                                    <p>PRESS THE 'A' BUTTON</p>
+                                                                </div>
+                                                            </div>
+                                                            <div id="nintendo_screen_game" class="block">
+                                                                <canvas id="nintendo_canvas"></canvas>
+                                                                <div id="nintendo_screen_gameover" class="block">
+                                                                    <p>GAME OVER</p>
+                                                                    <div id="nintendo_screen_restart">RESTART</div>
+                                                                </div>                                                             
+                                                            </div>
+                                                            <div id="nintendo_screen_sky" class="block"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="nintendo_xyab_key">
+                                                        <div class="nintendo_xyab x"><p>X</p></div>
+                                                        <div class="nintendo_xyab y"><p>Y</p></div>
+                                                        <div class="nintendo_xyab a"><p>A</p></div>
+                                                        <div class="nintendo_xyab b"><p>B</p></div>
+                                                    </div>
+                                                    <div class="nintendo_other_key">
+                                                        <div class="nintendo_other start">
+                                                            <div class="nintendo_other_button" id="nintendo_start_button"></div>
+                                                            <p>START</p>
+                                                        </div>
+                                                        <div class="nintendo_other select">
+                                                            <div class="nintendo_other_button"></div>
+                                                            <p>SELECT</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_content three block">
+                                    <div class="modal_topbar">
+                                        <p>blue marble</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_bluemarble">
+                                                <div id="bluemarble_board">
+                                                    <div class="board first corner1"></div>
+                                                    <div class="board first line"></div>
+                                                    <div class="board first line"></div>
+                                                    <div class="board first line"></div>
+                                                    <div class="board first line"></div>
+                                                    <div class="board first line"></div>
+                                                    <div class="board first line"></div>
+                                                    <div class="board first corner2"></div>
+                                                    <div class="board second"></div>
+                                                    <div class="board_center"></div>
+                                                    <div class="board second right"></div>
+                                                    <div class="board second"></div>
+                                                    <div class="board_center"></div>
+                                                    <div class="board second right"></div>
+                                                    <div class="board second"></div>
+                                                    <div class="board_center"></div>
+                                                    <div class="board second right"></div>
+                                                    <div class="board second"></div>
+                                                    <div class="board_center"></div>
+                                                    <div class="board second right"></div>
+                                                    <div class="board first corner3"></div>
+                                                    <div class="board first"></div>
+                                                    <div class="board first"></div>
+                                                    <div class="board first"></div>
+                                                    <div class="board first"></div>
+                                                    <div class="board first"></div>
+                                                    <div class="board first"></div>
+                                                    <div class="board first start"></div>
+                                                </div>
+                                                <div id="bluemarble_player"></div>
+                                                <div id="bluemarble_dice">
+                                                    <div class="dice"></div>
+                                                </div>
+                                                <div id="bluemarble_board_bg"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_content four block">
+                                    <div class="modal_topbar">
+                                        <p>passport</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_passport">
+                                                <img src="./img/passport_cover.png" height="495px" id="passport_cover">
+                                                <img src="./img/passport_inside_.png" height="495px" id="passport_inside" class="block">
+                                                <img src="./img/airport_ticket.png" id="airport_ticket">
+                                                <div id="passport_airport_stamp" class="block">
+                                                    <div class="airport_stamp one" id="airport_stamp_one"></div>                           
+                                                    <div class="airport_stamp two" id="airport_stamp_two"></div>                           
+                                                    <div class="airport_stamp three"></div>                           
+                                                    <div class="airport_stamp four"></div>                           
+                                                    <div class="airport_stamp five"></div>                           
+                                                </div>
+                                            </div>
+                                            <div id="airport_stamp_move"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_content five block">
+                                    <div class="modal_topbar">
+                                        <p>camera</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_camera">
+                                                <div id="camera">
+                                                    <div id="camera_polaroid">
+                                                        <div id="camera_button"></div>
+                                                        <div id="camera_main">
+                                                            <div id="camera_lens"></div>
+                                                            <div id="camera_lens2"></div>
+                                                            <div id="camera_rainbow"></div>
+                                                            <div id="camera_rectangle"></div>
+                                                            <div id="camera_red_button">
+                                                                <div id="camera_red"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="camera_print down">
+                                                            <div class="camera_print_box down"></div>
+                                                        </div>
+                                                        <div class="camera_film">
+                                                            <div class="camera_film_white">
+                                                                <div class="camera_film_img">
+                                                                    <img src="./img/film_1.png">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="camera_film two block">
+                                                            <div class="camera_film_white">
+                                                                <div class="camera_film_img">
+                                                                    <img src="./img/film_2.png">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="camera_film three block">
+                                                            <div class="camera_film_white">
+                                                                <div class="camera_film_img">
+                                                                    <img src="./img/film_3.png">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="camera_film four block">
+                                                            <div class="camera_film_white">
+                                                                <div class="camera_film_img">
+                                                                    <img src="./img/film_4.png">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="camera_film five block">
+                                                            <div class="camera_film_white">
+                                                                <div class="camera_film_img">
+                                                                    <img src="./img/film_5.png">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="camera_print up">
+                                                            <div class="camera_print_box up"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="film"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_content six block">
+                                    <div class="modal_topbar">
+                                        <p>coffee</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_coffee">
+                                                <div class="coffee_title">
+                                                    <p>나의 에스프레소 농도의 취향은?</p>
+                                                </div>
+                                                <div class="coffee_range">
+                                                    <input type="range" min="0" max="10" step="1" value="0">
+                                                </div>
+                                                <div class="coffee_range_num">
+                                                    <p id="coffee_range_shot">0</p>
+                                                    <p>샷</p>
+                                                </div>
+                                                <div id="coffee_cup">
+                                                    <div class="coffee_cup_make">
+                                                        <img src="./img/iced_coffee.png" alt="">
+                                                        <div id="coffee_ice">
+                                                            <div class="coffee_cup_ice"></div>
+                                                            <div class="coffee_cup_ice"></div>
+                                                            <div class="coffee_cup_ice"></div>
+                                                            <div class="coffee_cup_ice"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_content seven block">
+                                    <div class="modal_topbar">
+                                        <p>music</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_music">
+                                                <div id="music_LP">
+                                                    <div class="lp_box">
+                                                        <div class="lp"></div>
+                                                        <div class="lp_bar"></div>
+                                                        <div class="lp_setting">
+                                                            <div id="music_title">
+                                                                <p>스텔라장 - Winter Dream</p>
+                                                            </div>
+                                                            <div id="lp_button">
+                                                                <button id="before_music_button">이전</button>
+                                                                <button id="next_music_button">다음</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal_content eight block">
+                                    <div class="modal_topbar">
+                                        <p>colorpicker</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_color">
+                                                <div id="color_setup_list">
+                                                    <div class="color_setup">
+                                                        <div class="color_title">
+                                                            <div class="title_icon">
+                                                                <img src="./img/icon/computer.png" width="80px">
+                                                            </div>
+                                                            <p>모니터 바꾸기</p>
+                                                            <div class="is_color">
+                                                                <div class="color_change">
+                                                                    <p>색상 선택</p>
+                                                                    <div class="color_select monitor">
+                                                                        <input type="color">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="color_setup">
+                                                        <div class="color_title">
+                                                            <div class="title_icon">
+                                                                <img src="./img/icon/cloud.png" width="80px">
+                                                            </div>
+                                                            <p>하늘 바꾸기</p>
+                                                            <div class="is_color">
+                                                                <div class="color_change">
+                                                                    <p>색상 선택</p>
+                                                                    <div class="color_select sky">
+                                                                        <input type="color">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="color_setup">
+                                                        <div class="color_title">
+                                                            <div class="title_icon">
+                                                                <img src="./img/icon/wall.png" width="80px">
+                                                            </div>
+                                                            <p>벽 바꾸기</p>
+                                                            <div class="is_color">
+                                                                <div class="color_change">
+                                                                    <p>색상 선택</p>
+                                                                    <div class="color_select wall">
+                                                                        <input type="color">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_content nine block">
+                                    <div class="modal_topbar">
+                                        <p>language</p>
+                                        <div class="topbar_exit">
+                                            <span>×</span>
+                                        </div>
+                                    </div>
+                                    <div class="modal_content_inside">
+                                        <div class="modal_inside">
+                                            <div id="modal_language">
+                                                <ul>
+                                                    <li class="flip_wrap">
+                                                        <div class="language_card_wrap one">
+                                                            <div class="language_card front purple">
+                                                                <p>보라색</p>
+                                                            </div>
+                                                            <div class="language_card back purple"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="flip_wrap">
+                                                        <div class="language_card_wrap two">
+                                                            <div class="language_card front lucky">
+                                                                <p>행운</p>
+                                                            </div>
+                                                            <div class="language_card back lucky"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="flip_wrap">
+                                                        <div class="language_card_wrap three">
+                                                            <div class="language_card front friend">
+                                                                <p>친구</p>
+                                                            </div>
+                                                            <div class="language_card back friend"></div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="flip_wrap">
+                                                        <div class="language_card_wrap four">
+                                                            <div class="language_card front love">
+                                                                <p>사랑해</p>
+                                                            </div>
+                                                            <div class="language_card back love"></div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="screen_underbar">
+                            <div class="underbar"></div>
+                            <div class="underbar_clock">
+                                <div class="hour">00</div>
+                                <span>:</span>
+                                <div class="min">00</div>
+                            </div>
+                            <!--class="block"-->
+                            <div class="underbar_today block"></div>
+                        </div>
+
+                    </div> 
+                </div>
+                <div class="monitor_neck"></div>
+                <div class="monitor_bottom"></div>
+            </div>
+            <div class="clear"></div>
+            <div id="background_night">
+                <div class="lamp_day">
+                    <img src="./img/lamp_day.svg">
+                </div>
+            </div>    
+            <div id="monitor_desk"></div>
+        </div>
+        
+    </div>
+
+    <!-- --------------------드래그앤드롭-------------------- -->
+     <!-- 출처 https://jqueryui.com/draggable/#sortable -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+
+<script type="text/javascript" src="./js/typing_effect.js"></script>
+
+<!-- --------------------------------modal content-------------------------------- -->
+<script type="text/javascript" src="./modal_contents_inside.js"></script>
+
+<!-- --------------------------------computer game-------------------------------- -->
+<script type="text/javascript" src="./js/bounceballgame.js"></script>
+<!-- --------------------------------nintendo game-------------------------------- -->
+<script type="text/javascript" src="./js/mario.js"></script>
+
+<script>
+    // ----------------------------------------초기화면----------------------------------------
+    const welcomeTxt = document.querySelector('.welcome_text')
+    setTimeout(() => {
+        welcomeTxt.classList.add('block')
+        document.querySelector('#welcome_password').classList.remove('block')
+    }, 12000); //12초 뒤에 실행
+
+
+
+    let passwordNum = document.querySelector('#welcome_password_num')
+    let passwordRight = document.querySelector('#welcome_password_enter')
+    const passwordRandomNum = Math.floor(1000 + Math.random() * 9000);
+    passwordNum.innerHTML = passwordRandomNum;
+
+    passwordRight.addEventListener('keydown', (event) => {
+
+        if (event.key === 'Enter') {
+
+            if(passwordRight.value == passwordRandomNum) {
+                document.querySelector('#screen_password').classList.add('block')
+                document.querySelector('#screen_main').classList.remove('block')
+            } else {
+                // passwordRight.classList.add('.input_animation')
+                alert("비밀번호를 다시 입력해주세요.");
+            }
+
+        }
+        
+    })
+
+    // ----------------------------------------시계----------------------------------------
+    let hour = document.querySelector('.hour');
+    let min = document.querySelector('.min');
+
+    function getClock (){
+        let today = new Date();
+        const hours = today.getHours();
+        const minutes = today.getMinutes();
+
+        // 분
+        if (minutes < 10) {
+            min.innerHTML = '0' + minutes;
+        } else {
+            min.innerHTML = minutes;
+        }
+        // 시
+        if (hours < 10) {
+            hour.innerHTML = '0' + hours;
+        } else {
+            hour.innerHTML = hours;
+        }
+    }
+    
+    getClock(); 
+    setInterval(getClock, 1000); 
+
+    // ----------------------------------------낮밤----------------------------------------
+    let dayBtn = document.querySelector('.lamp_day > img')
+
+    // 챗지피티 도움
+    dayBtn.addEventListener('click', () => {
+
+        if (dayBtn.src.includes('lamp_day.svg')) { 
+            dayBtn.src = "./img/lamp_night.svg";
+            document.body.style.backgroundColor = '#575C77';
+            document.querySelector('.window_frame').style.backgroundColor = '#575C77';
+            document.querySelector('.window').style.backgroundColor = '#260F81'
+
+        } else if (dayBtn.src.includes('lamp_night.svg')) { 
+            dayBtn.src = "./img/lamp_day.svg";
+            document.body.style.backgroundColor = '#ffc567';
+            document.querySelector('.window_frame').style.backgroundColor = '#ffc567';
+            document.querySelector('.window').style.backgroundColor = '#058cd7'
+
+        }
+
+    })
+
+    // ----------------------------------------드래그앤드롭----------------------------------------
+    // 바탕화면 아이콘 이동
+    $(() => {
+
+        $('.contents_icon').draggable({
+            containment : '#screen_contents',
+        });
+
+        // 스탬프 #airport_stamp 이동
+        $('#airport_stamp_move').draggable({
+            containment : '#modal_passport',
+            revert: true
+        });
+        $('.airport_stamp').droppable({
+            drop : function() {
+                $(this)
+                .addClass('open')
+            }
+        });
+
+        // 티켓 이동
+        $('#airport_ticket').draggable({
+            containment : '#modal_passport'
+        });
+
+        // camerafilm
+        $('.camera_film').draggable({
+            containment : '#film'
+        })
+    })
+
+    // ----------------------------------------modal 열기----------------------------------------
+    let contentsIcon = document.querySelectorAll('.contents_icon')
+    let modalContent = document.querySelectorAll('.modal_content')
+
+    contentsIcon.forEach((icon, index) => {
+
+        icon.addEventListener('dblclick', () => {
+
+            // modalContent가 contentIcon의 인덱스와 동일한 애가 열린다
+            modalContent[index].classList.remove('block')
+        })
+    })
+
+    // ----------------------------------------modal 닫기----------------------------------------
+    let modalExit = document.querySelectorAll('.topbar_exit')
+    
+
+    modalExit.forEach((exit, index) => {
+
+        exit.addEventListener('click', () => {
+
+            modalContent[index].classList.add('block')
+
+        })
+
+    })
+
+</script>
+</body>
+</html>

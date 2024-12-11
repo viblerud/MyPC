@@ -1,0 +1,332 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffc567;
+    box-sizing: border-box;
+    min-height: 100vh;
+    overflow: hidden;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+/* --------------------------------배경-------------------------------- */
+#background {
+    display: flex;
+}
+
+#background > .window {
+    width: 100%;
+    height: 500px;
+    background-color: #058cd7;
+    box-shadow: 0 0 0 1px #3e3e3e inset;
+    background-image: url(./img/bg_cloud.svg);
+    animation: scrollingBg 2000s linear infinite ;
+    background-position-x: top;
+}
+@keyframes scrollingBg{
+    100% {
+    background-position: 100000px 0px;
+    }
+}
+/* #background_window_frame {
+    position:relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;    
+} */
+#background > .window_frame {
+    position: absolute;
+    left: 49%;
+    width: 30px;
+    height: 500px;
+    background-color: #ffc567;
+    border-left: solid 1px #3e3e3e ;
+    border-right: solid 1px #3e3e3e ;
+}
+
+/* --------------------------------메인-------------------------------- */
+
+#main_contents {
+    width: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#monitor {
+    width: 1304px;
+    margin: 0px calc((100vw - 1304px) / 2);
+}
+.monitor_screen {
+    width: 1304px;
+    height: 740px;
+    box-shadow: 0 0 0 1px #3e3e3e inset;
+    background-color: #552cb7; /* 작업환경 확인 */
+    border-radius: 50px;
+}
+.monitor_screen > #screen_password {
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    background-image: url(./img/monitor_bg.png);
+    box-shadow: 0 0 0 1px #3e3e3e inset;
+    margin: 10px 12px;
+    border-radius: 44px;
+}
+.monitor_neck {
+    margin: 0 527px;
+    width: 250px;
+    height: 60px;
+    border-left: solid 1px #3e3e3e ;
+    border-right: solid 1px #3e3e3e ;
+    background-color: #552cb7; /* 작업환경 확인 */
+}
+.monitor_bottom {
+    margin: 0 390px;
+    width: 500px;
+    height: 20px;
+    border-left: solid 1px #3e3e3e ;
+    border-right: solid 1px #3e3e3e ;
+    border-top: solid 1px #3e3e3e ;
+    background-color: #552cb7; /* 작업환경 확인 */
+}
+#monitor_desk {
+    width: 100%;
+    height: calc(100vh);
+    background-color: #fb7da8;
+    border-top: solid 1px #3e3e3e ;
+    position: absolute;
+}
+/* --------------------------------낮밤-------------------------------- */
+.lamp_day > img {
+    position: absolute;
+    bottom: 0;
+    width: 300px;
+    cursor: pointer;
+}
+
+
+/* --------------------------------비밀번호-------------------------------- */
+#screen_welcome > .welcome_text {
+    font-size: 2.5rem;
+    color: white;
+    text-align: center;
+    margin-top: 330px;
+    font-weight: bold;
+    -webkit-text-stroke: 1px #3e3e3e;
+}
+.welcome_text::after {
+    content: '';
+    margin-left: .3rem;
+    border-right: 2px solid #ffffff;
+    animation: cursor 1s infinite steps(2);
+}
+@keyframes cursor {
+    from { border-right: 4px solid #ffffff; }
+    to { border-right: 4px solid #ffffff00; }
+}
+.block {
+    display: none;
+}
+#welcome_password_num {
+    font-size: 3.5em;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    /* font-family: ; */
+    margin-top: 260px;
+    -webkit-text-stroke: 1px #3e3e3e;
+}
+#welcome_password_enter {
+    width: 250px;
+    height: 40px;
+    border: solid 1px #3e3e3e;
+    border-radius: 10px;
+    font-size: 1.3em;
+    color: #5f5f5f;
+    font-weight: 500;
+    margin: 100px 515px 0 515px;
+    text-align: center;
+
+    /* &.input_animation {
+        animation: shake 0.2s ease-in-out 2;
+    } */
+}
+/* 
+@keyframes shake {
+    0% { margin-left: 0rem; }
+    25% { margin-left: 0.5rem; }
+    75% { margin-left: -0.5rem; }
+    100% { margin-left: 0rem; }
+  } */
+/* --------------------------------바탕화면-------------------------------- */
+#screen_main {
+    /* background-color: #FFFCE6; */
+    background-image: url(./img/screen_bg-100.jpg);
+    position: absolute;
+    width: 1280px;
+    height: 720px;
+    box-shadow: 0 0 0 1px #3e3e3e inset;
+    margin: 10px 12px;
+    border-radius: 44px;
+}
+/* --------------------------------바탕화면 아이콘-------------------------------- */
+#screen_main > #screen_contents {
+    width: 1280px;
+    height: 680px;
+    display: flex;
+    justify-content: center;
+}
+.contents_icon {
+    /* position: absolute; */
+    margin: 30px 10px;
+    width: 100px;
+    height: 110px;
+    /* background-color: #fff; */
+    border: solid 1px #ffffff00;
+    color: #3e3e3e;
+    cursor: grab;
+
+    &:hover {
+        color: #fff;
+        background-color: #562cb788;
+        border: dashed 1px #3e3e3e;
+    }
+    &:active {
+        cursor: grabbing;
+        background-color: #552cb7;
+    }
+    /* &.two {
+        margin-left: 140px;
+    }
+    &.three {
+        margin-left: 250px;
+    }
+    &.four {
+        margin-left: 360px;
+    }
+    &.five {
+        margin-left: 470px;
+    }
+    &.six {
+        margin-left: 580px;
+    }
+    &.seven {
+        margin-left: 690px;
+    }
+    &.eight {
+        margin-left: 800px;
+    }
+    &.nine {
+        margin-left: 910px;
+    } */
+}
+.contents_icon > p {
+    /* position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0); */
+    font-weight: bold;
+    font-size: 1rem; 
+    text-align: center;
+    margin-top: 87px;
+}
+.contents_icon > .contents_img {
+    position: absolute;
+    margin: 3px 13.5px 0 13px;
+}
+/* --------------------------------콘텐츠 모달창-------------------------------- */
+#contents_modal > .modal_content {
+    position: absolute;
+    left: 0px; 
+    /* margin-top: 10px; */
+    z-index: 1;
+    width: 100%;
+    height: calc(100% - 40px);
+    background-color: white;
+    border-radius: 40px 40px 0 0;
+    box-shadow: 0 0 0 1px #3e3e3e inset;
+}
+
+
+/* --------------------------------모달창 tap bar------------------------------ */
+.modal_topbar {
+    width: 100%;
+    height: 40px;
+    background-color: #fb7da8;
+    border-radius: 40px 40px 0 0;
+    box-shadow: 0 0 0 1px #3e3e3e inset;
+
+    > p {
+        position: absolute;
+        color: white;
+        margin-top: 9px;
+        margin-left: 25px;
+        font-weight: 900;
+        font-size: 1.2em;
+        -webkit-text-stroke: 0.8px #3e3e3e;
+    }
+    > .topbar_exit {
+        position: absolute;
+        right: 18px;
+        /* margin-top: 12px; */
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+
+        > span {
+            position: absolute;
+            font-weight: bold;
+            color: white;
+            font-size: 2em;
+            -webkit-text-stroke: 1px #3e3e3e;
+        }
+    }
+}
+
+/* --------------------------------하단바-------------------------------- */
+#screen_underbar > .underbar {
+    width: 100%;
+    height: 40px;
+    background-color: #3e3e3e;
+    /* margin-top: 680px; */
+    border-radius: 0 0 44px 44px;
+    box-shadow: 0 0 0 1px #3e3e3e inset;
+}
+#screen_underbar > .underbar_clock {
+    position: absolute;
+    display: flex;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #fff;
+    bottom: 9px;
+    right: 45px;
+    -webkit-text-stroke: 1px #3e3e3e;
+}
+.underbar_clock > span {
+    animation: clock 1s steps(2) infinite;
+}
+@keyframes clock {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.underbar_today {
+    position: absolute;
+    bottom: 50px;
+    right: 15px;
+
+    width: 220px;
+    height: 80px;
+    background-color: #3e3e3e;
+    /* backdrop-filter: blur(4px); */
+    border-radius: 15px;
+    /* border: solid 1px #3e3e3e; */
+    /* box-shadow: 0 0 0 1px #3e3e3e inset; */
+    /* box-shadow: 0 2px 8px 5px rgba(0,0,0,0.15); */
+}
